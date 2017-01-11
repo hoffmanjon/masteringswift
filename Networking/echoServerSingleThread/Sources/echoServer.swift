@@ -1,5 +1,9 @@
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin
+#endif
 import Foundation
-import Glibc
 import Socket
 
 class EchoServer {
