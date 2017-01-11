@@ -1,0 +1,12 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "Ifaddrs",
+      "reason": null,
+      "repositoryURL": "/home/hoffmanjon/Documents/MasteringSwift_Github/Networking/Modules/ifaddrs",
+      "version": "0.1.0"
+    }
+  ],
+  "version": 1
+}
