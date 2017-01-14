@@ -23,32 +23,27 @@ class EchoClient {
         listenSocket?.close()
     }
 
-    func start() {
-        do {
-            let socket = try Socket.create() 
-            listenSocket = socket
-            try socket.connect(to: server, port: Int32(port))
-            var dataRead = Data(capacity: bufferSize)
-            var cont = true
-            repeat {
-                print("Enter Text:")
-                if let entered = readLine(strippingNewline: true) {
-                    try socket.write(from: entered)
-                    if entered.hasPrefix("quit") {
-                        cont = false
-                    }
-                    let bytesRead = try socket.read(into: &dataRead)
-                    if bytesRead > 0 {
-                        if let readStr = String(data: dataRead, encoding: .utf8) {
-                            print("Received: '\(readStr)'")
-                        }
-                        dataRead.count = 0
-                    }
-                }
-            } while cont
-
-        } catch let error {
-            print("error: \(error)")
-        }
+    func start() throws {
+      let socket = try Socket.create() 
+      listenSocket = socket
+      try socket.connect(to: server, port: Int32(port))
+      var dataRead = Data(capacity: bufferSize)
+      var cont = true
+       repeat {
+          print("Enter Text:")
+          if let entered = readLine(strippingNewline: true) {
+            try socket.write(from: entered)
+            if entered.hasPrefix("quit") {
+               cont = false
+            }
+            let bytesRead = try socket.read(into: &dataRead)
+            if bytesRead > 0 {
+              if let readStr = String(data: dataRead, encoding: .utf8) {
+                print("Received: '\(readStr)'")
+              }
+              dataRead.count = 0
+            }
+          }
+       } while cont
     }
 }
